@@ -4,7 +4,7 @@ from django.db import models
 class Movie(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    duration = models.IntegerField()
+    duration = models.IntegerField(help_text="Duration in minutes")
 
     class Meta:
         verbose_name_plural = 'movies'

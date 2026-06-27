@@ -1,3 +1,5 @@
-from django.shortcuts import render
+def movie_list(request):
+    ...
 
-# Create your views here.
+def movie_detail(request, pk):
+    ...

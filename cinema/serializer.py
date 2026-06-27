@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from cinema.models import *
+from cinema.models import Movie
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -7,11 +7,21 @@ class MovieSerializer(serializers.ModelSerializer):
     title = serializers.CharField(required=True, max_length=200)
     description = serializers.CharField(required=True)
 
+    class Meta:
+        model = Movie
+        fields = "__all__"
+
     def create(self, validated_data):
         return Movie.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
+        instance.title = validated_data.get(
+            "title",
+            instance.title,
+        )
+        instance.description = validated_data.get(
+            "description",
+            instance.description,
+        )
         instance.save()
         return instance

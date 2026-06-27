@@ -1,7 +1,5 @@
-from django.core.serializers import serialize
 from django.http import JsonResponse
-from django.shortcuts import render
-from requests import Response
+from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
@@ -13,8 +11,8 @@ from cinema.serializer import MovieSerializer
 @api_view(["GET", "POST"])
 def movie_list(request):
     if request.method == "GET":
-        buses = Movie.objects.all()
-        serializer = MovieSerializer(buses, many=True)
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies, many=True)
         return JsonResponse(serializer.data, safe=False, status=200)
     else:
         serializer = MovieSerializer(data=request.data)
